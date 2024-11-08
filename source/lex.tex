@@ -722,13 +722,9 @@ a \grammarterm{floating-point-literal} token.%
 
 \rSec1[lex.operators]{Operators and punctuators}
 
-\pnum
 \indextext{operator|(}%
 \indextext{punctuator|(}%
-The lexical representation of \Cpp{} programs includes a number of
-preprocessing tokens that are used in the syntax of the preprocessor or
-are converted into tokens for operators and punctuators:
-
+\indextext{preprocessing token!alternative|(}%
 \begin{bnf}
 \nontermdef{preprocessing-op-or-punc}\br
     preprocessing-operator\br
@@ -756,15 +752,13 @@ are converted into tokens for operators and punctuators:
     \terminal{\keyword{and_eq}   \keyword{or_eq}    \keyword{xor_eq}   \keyword{not_eq}}
 \end{bnf}
 
-Each \grammarterm{operator-or-punctuator} is converted to a single token
+\pnum
+The lexical representation of \Cpp{} programs includes a number of
+preprocessing tokens that are used in the syntax of the preprocessor.
+Each \grammarterm{operator-or-punctuator} is converted to a single \grammarterm{token}
 in translation phase 7\iref{lex.phases}.%
-\indextext{punctuator|)}%
-\indextext{operator|)}
-
-\rSec1[lex.digraph]{Alternative preprocessing tokens}
 
 \pnum
-\indextext{preprocessing token!alternative|(}%
 Alternative preprocessing token representations are provided for some operators and
 punctuators.
 \begin{footnote}
@@ -776,8 +770,6 @@ descriptive, since one of the alternative preprocessing tokens is
 characters. Nonetheless, those alternative preprocessing tokens that aren't lexical
 keywords are colloquially known as ``digraphs''.
 \end{footnote}
-
-\pnum
 In all respects of the language, each alternative preprocessing token behaves the
 same, respectively, as its primary token, except for its spelling.
 \begin{footnote}
@@ -809,6 +801,8 @@ The set of alternative preprocessing tokens is defined in
                         &                      \\
 \end{tokentable}%
 \indextext{preprocessing token!alternative|)}
+\indextext{punctuator|)}%
+\indextext{operator|)}
 
 \rSec1[lex.token]{Tokens}
 
