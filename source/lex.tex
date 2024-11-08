@@ -9,8 +9,8 @@
 \indextext{separate compilation|see{compilation, separate}}
 \indextext{phases of translation|see{translation, phases}}
 \indextext{source file character|see{character, source file}}
-\indextext{alternative token|see{token, alternative}}
-\indextext{digraph|see{token, alternative}}
+\indextext{alternative preprocessing token|see{preprocessing token, alternative}}
+\indextext{digraph|see{preprocessing token, alternative}}
 \indextext{integer literal|see{literal, integer}}
 \indextext{character literal|see{literal, character}}
 \indextext{floating-point literal|see{literal, floating-point}}
@@ -178,9 +178,12 @@ that common \grammarterm{encoding-prefix}.
 \item
 Adjacent \grammarterm{string-literal} tokens are concatenated\iref{lex.string}.
 
-\item Whitespace characters separating tokens are no longer
-significant. Each preprocessing token is converted into a
-token\iref{lex.token}. The resulting tokens
+\item
+Each alternative preprocessing token (\tref{lex.digraph}) is replaced by its
+corresponding primary token, then  each preprocessing token is converted into a
+token\iref{lex.token}.
+Whitespace characters separating tokens are no longer significant.
+The resulting tokens
 constitute a \defn{translation unit} and
 are syntactically and
 semantically analyzed and translated.
@@ -579,7 +582,7 @@ of characters that matches the raw-string pattern
 
 \item Otherwise, if the next three characters are \tcode{<::} and the subsequent character
 is neither \tcode{:} nor \tcode{>}, the \tcode{<} is treated as a preprocessing token by
-itself and not as the first character of the alternative token \tcode{<:}.
+itself and not as the first character of the alternative preprocessing token \tcode{<:}.
 
 \item Otherwise,
 the next preprocessing token is the longest sequence of
@@ -758,34 +761,34 @@ in translation phase 7\iref{lex.phases}.%
 \indextext{punctuator|)}%
 \indextext{operator|)}
 
-\rSec1[lex.digraph]{Alternative tokens}
+\rSec1[lex.digraph]{Alternative preprocessing tokens}
 
 \pnum
-\indextext{token!alternative|(}%
-Alternative token representations are provided for some operators and
+\indextext{preprocessing token!alternative|(}%
+Alternative preprocessing token representations are provided for some operators and
 punctuators.
 \begin{footnote}
 \indextext{digraph}%
 These include ``digraphs'' and additional reserved words. The term
 ``digraph'' (token consisting of two characters) is not perfectly
-descriptive, since one of the alternative \grammarterm{preprocessing-token}s is
+descriptive, since one of the alternative preprocessing tokens is
 \tcode{\%:\%:} and of course several primary tokens contain two
-characters. Nonetheless, those alternative tokens that aren't lexical
+characters. Nonetheless, those alternative preprocessing tokens that aren't lexical
 keywords are colloquially known as ``digraphs''.
 \end{footnote}
 
 \pnum
-In all respects of the language, each alternative token behaves the
+In all respects of the language, each alternative preprocessing token behaves the
 same, respectively, as its primary token, except for its spelling.
 \begin{footnote}
 Thus the ``stringized'' values\iref{cpp.stringize} of
 \tcode{[} and \tcode{<:} will be different, maintaining the source
-spelling, but the tokens can otherwise be freely interchanged.
+spelling, but the \grammarterm{preprocessing-token}s can otherwise be freely interchanged.
 \end{footnote}
-The set of alternative tokens is defined in
+The set of alternative preprocessing tokens is defined in
 \tref{lex.digraph}.
 
-\begin{tokentable}{Alternative tokens}{lex.digraph}{Alternative}{Primary}
+\begin{tokentable}{Alternative preprocessing tokens}{lex.digraph}{Alternative}{Primary}
 \tcode{<\%}             &   \tcode{\{}         &
 \keyword{and}           &   \tcode{\&\&}       &
 \keyword{and_eq}        &   \tcode{\&=}        \\ \rowsep
@@ -805,7 +808,7 @@ The set of alternative tokens is defined in
 \keyword{bitand}        &   \tcode{\&}         &
                         &                      \\
 \end{tokentable}%
-\indextext{token!alternative|)}
+\indextext{preprocessing token!alternative|)}
 
 \rSec1[lex.token]{Tokens}
 
@@ -831,7 +834,7 @@ Blanks, horizontal and vertical tabs, newlines, formfeeds, and comments
 as they serve to separate tokens.
 \begin{note}
 Whitespace can separate otherwise adjacent identifiers, keywords, numeric
-literals, and alternative tokens containing alphabetic characters.
+literals, and alternative preprocessing tokens containing alphabetic characters.
 \end{note}
 \indextext{token|)}
 
@@ -1065,19 +1068,12 @@ is reserved for future use.
 \end{multicolfloattable}
 
 \pnum
-Furthermore, the alternative representations shown in
-\tref{lex.key.digraph} for certain operators and
-punctuators\iref{lex.digraph} are reserved and shall not be used
-otherwise.
-
-\begin{floattable}{Alternative representations}{lex.key.digraph}
-{llllll}
-\topline
-\keyword{and}     &   \keyword{and_eq}  &   \keyword{bitand}  &   \keyword{bitor}   &   \keyword{compl}   &   \keyword{not} \\
-\keyword{not_eq}  &   \keyword{or}      &   \keyword{or_eq}   &   \keyword{xor}     &   \keyword{xor_eq}  &       \\
-\end{floattable}%
-\indextext{keyword|)}%
-
+\begin{note}
+Several alternative preprocessing tokens (\tref{lex.digraph}) that are
+lexically equivalent to an identifier are replaced by their primary token at
+the start of translation phase 7, so are not available as identifers or
+keywords.
+\end{note}
 
 \rSec1[lex.literal]{Literals}%
 \indextext{literal|(}
