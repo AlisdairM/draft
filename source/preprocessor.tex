@@ -2071,12 +2071,6 @@ a macro name.
 \indextext{\idxcode{\#line}|see{preprocessing directive, line control}}
 
 \pnum
-The \grammarterm{string-literal} of a
-\tcode{\#line}
-directive, if present,
-shall be a character string literal.
-
-\pnum
 The
 \defn{line number}
 of the current source line is
@@ -2106,7 +2100,7 @@ A preprocessing directive of the form
 \end{ncsimplebnf}
 sets the presumed line number similarly and changes the
 presumed name of the source file to be the contents
-of the character string literal.
+of the \grammarterm{s-char-sequence}.
 
 \pnum
 A preprocessing directive of the form
